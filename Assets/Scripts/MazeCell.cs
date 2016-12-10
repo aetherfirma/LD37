@@ -8,6 +8,7 @@ namespace Assets.Scripts
 
         // Up +Z, Right +X
         public MazeCell Up, Down, Left, Right;
+        public GameObject UpDoor, DownDoor, LeftDoor, RightDoor;
 
         public int X, Y;
         private readonly GameObject[][] _gameObjectLookup;

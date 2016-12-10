@@ -20,7 +20,6 @@ namespace Assets.Scripts
         {
             var maze = new MazeCell[(int)MazeSize.x, (int)MazeSize.y];
             var unvisited = new HashSet<MazeCell>();
-            var doors = new HashSet<Vector3>();
             for (var x = 0; x < MazeSize.x; x++)
             {
                 for (var y = 0; y < MazeSize.y; y++)
@@ -61,24 +60,24 @@ namespace Assets.Scripts
                     var mazeCell = maze[x, y];
                     Debug.Log(mazeCell);
                     Instantiate(mazeCell.GameObject(), mazeCell.Position(), mazeCell.Rotation(), transform);
-                    PlaceDoors(mazeCell, doors);
+                    PlaceDoors(mazeCell);
                 }
             }
         }
 
-        private void PlaceDoors(MazeCell cell, HashSet<Vector3> doors)
+        private void PlaceDoors(MazeCell cell)
         {
             Vector3 upDoor = cell.Position() + new Vector3(0, 0 , 5), downDoor = cell.Position() + new Vector3(0, 0, -5),
                 rightDoor = cell.Position() + new Vector3(5, 0, 0), leftDoor = cell.Position() + new Vector3(-5, 0, 0);
             Quaternion leftRight = Quaternion.Euler(0, 90, 0);
-            if (cell.Up != null && Random.value > 0.75 && !doors.Contains(upDoor))
-                Instantiate(Door, upDoor, Quaternion.identity, transform);
-            if (cell.Down != null && Random.value > 0.75 && !doors.Contains(downDoor))
-                Instantiate(Door, downDoor, Quaternion.identity, transform);
-            if (cell.Left != null && Random.value > 0.75 && !doors.Contains(leftDoor))
-                Instantiate(Door, leftDoor, leftRight, transform);
-            if (cell.Right != null && Random.value > 0.75 && !doors.Contains(rightDoor))
-                Instantiate(Door, rightDoor, leftRight, transform);
+            if (cell.Up != null && Random.value > 0.75 && cell.UpDoor == null)
+                cell.Up.DownDoor = cell.UpDoor = Instantiate(Door, upDoor, Quaternion.identity, transform);
+            if (cell.Down != null && Random.value > 0.75 && cell.DownDoor == null)
+                cell.Down.UpDoor = cell.DownDoor = Instantiate(Door, downDoor, Quaternion.identity, transform);
+            if (cell.Left != null && Random.value > 0.75 && cell.LeftDoor == null)
+                cell.Left.RightDoor = cell.LeftDoor = Instantiate(Door, leftDoor, leftRight, transform);
+            if (cell.Right != null && Random.value > 0.75 && cell.RightDoor == null)
+                cell.Right.LeftDoor = cell.RightDoor = Instantiate(Door, rightDoor, leftRight, transform);
         }
 
         private static void DebugLines(MazeCell cell)
