@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: b4657690df8a52d41b1fa63d8246faa9
+timeCreated: 1481372080
+licenseType: Free
+SketchUpImporter:
+  generateBackFace: 0
+  mergeCoplanarFaces: 0
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f0000002000000021000000220000002300000024000000250000002600000027000000
+  assetHash:
+    serializedVersion: 2
+    Hash: cd10dcda0a94a2673e70920d6d3d59fe
+  longitude: -105.242139
+  latitude: 40.018309
+  northCorrection: -0
+  fileUnit: 0
+  sketchUpImportData:
+    defaultCamera:
+      position: {x: -48.928402, y: 5.5133505, z: 3.4915164}
+      lookAt: {x: -49.219852, y: 4.565131, z: 28.01083}
+      up: {x: -0.00045927233, y: 0.99925315, z: 0.03863801}
+      fov: 35
+      aspectRatio: 0
+      orthoSize: 1
+      isPerspective: 1
+    scenes: []
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: corridor corner junction
+    100002: corridor cross
+    100004: corridor l
+    100006: corridor section
+    100008: corridor section 1
+    100010: corridor section short
+    100012: corridor section short 1
+    100014: corridor section short 2
+    100016: corridor section short 3
+    100018: corridor section short 4
+    100020: corridor section short 5
+    100022: corridor section short 6
+    100024: corridor section short 7
+    100026: corridor section short 8
+    100028: corridor straight
+    100030: corridor t
+    100032: corridor t-junction
+    100034: corridor x
+    100036: Group 1
+    100038: //RootNode
+    100040: corridor de
+    100042: corridor deadend
+    100044: corridor section short 9
+    400000: corridor corner junction
+    400002: corridor cross
+    400004: corridor l
+    400006: corridor section
+    400008: corridor section 1
+    400010: corridor section short
+    400012: corridor section short 1
+    400014: corridor section short 2
+    400016: corridor section short 3
+    400018: corridor section short 4
+    400020: corridor section short 5
+    400022: corridor section short 6
+    400024: corridor section short 7
+    400026: corridor section short 8
+    400028: corridor straight
+    400030: corridor t
+    400032: corridor t-junction
+    400034: corridor x
+    400036: Group 1
+    400038: //RootNode
+    400040: corridor de
+    400042: corridor deadend
+    400044: corridor section short 9
+    2300000: corridor l
+    2300002: corridor section
+    2300004: corridor section 1
+    2300006: corridor section short
+    2300008: corridor section short 1
+    2300010: corridor section short 2
+    2300012: corridor section short 3
+    2300014: corridor section short 4
+    2300016: corridor section short 5
+    2300018: corridor section short 6
+    2300020: corridor section short 7
+    2300022: corridor section short 8
+    2300024: corridor t
+    2300026: corridor x
+    2300028: Group 1
+    2300030: corridor de
+    2300032: corridor section short 9
+    3300000: corridor l
+    3300002: corridor section
+    3300004: corridor section 1
+    3300006: corridor section short
+    3300008: corridor section short 1
+    3300010: corridor section short 2
+    3300012: corridor section short 3
+    3300014: corridor section short 4
+    3300016: corridor section short 5
+    3300018: corridor section short 6
+    3300020: corridor section short 7
+    3300022: corridor section short 8
+    3300024: corridor t
+    3300026: corridor x
+    3300028: Group 1
+    3300030: corridor de
+    3300032: corridor section short 9
+    4300000: Mesh Group 1
+    4300002: Mesh corridor section
+    4300004: Mesh corridor section short
+    4300006: Mesh corridor x
+    4300008: Mesh corridor t
+    4300010: Mesh corridor l
+    4300012: Mesh corridor de
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.0254
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
