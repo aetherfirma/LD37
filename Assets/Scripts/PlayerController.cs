@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
         _pushSlider = GameObject.Find("Push Slider").GetComponent<UnityEngine.UI.Slider>();
         _freefallStatus = GameObject.Find("Freefall Status").GetComponent<UnityEngine.UI.Text>();
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	// Update is called once per frame
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
         var grab = CanGrab();
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            _puntForce = Mathf.Min(_puntForce + Time.deltaTime * 7500, 10000);
+            _puntForce = Mathf.Min(_puntForce + Time.deltaTime * 30000, 15000);
         }
         else
         {
@@ -79,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
         if (grab && Input.GetKey(KeyCode.Mouse1))
         {
-            _rigidbody.drag = 10;
+            _rigidbody.drag = 2;
             _grabbing = true;
         }
         else
