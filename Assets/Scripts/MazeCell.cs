@@ -4,15 +4,15 @@ namespace Assets.Scripts
 {
     internal class MazeCell
     {
-        public GameObject Straight, Corner, TJunction, Cross, DeadEnd;
+        public GameObject[] Straight, Corner, TJunction, Cross, DeadEnd;
 
         // Up +Z, Right +X
         public MazeCell Up, Down, Left, Right;
 
         public int X, Y;
-        private readonly GameObject[] _gameObjectLookup;
+        private readonly GameObject[][] _gameObjectLookup;
 
-        public MazeCell(int x, int y, GameObject straight, GameObject corner, GameObject tJunction, GameObject cross, GameObject deadEnd)
+        public MazeCell(int x, int y, GameObject[] straight, GameObject[] corner, GameObject[] tJunction, GameObject[] cross, GameObject[] deadEnd)
         {
             X = x;
             Y = y;
@@ -65,7 +65,7 @@ namespace Assets.Scripts
             return connections;
         }
 
-        public GameObject GameObject()
+        public GameObject[] GameObjectSet()
         {
             if (Connections() == 2)
             {
@@ -74,28 +74,34 @@ namespace Assets.Scripts
             return _gameObjectLookup[Connections()];
         }
 
+        public GameObject GameObject()
+        {
+            var gameObjectSet = GameObjectSet();
+            return gameObjectSet[Mathf.RoundToInt(Random.value * (gameObjectSet.Length - 1))];
+        }
+
         public Quaternion Rotation()
         {
-            if (GameObject() == DeadEnd)
+            if (GameObjectSet() == DeadEnd)
             {
                 if (Down != null) return Quaternion.Euler(0, 0, 0);
                 if (Left != null) return Quaternion.Euler(0, 90, 0);
                 if (Up != null) return Quaternion.Euler(0, 180, 0);
                 if (Right != null) return Quaternion.Euler(0, 270, 0);
             }
-            if (GameObject() == Straight)
+            if (GameObjectSet() == Straight)
             {
                 if (Down != null) return Quaternion.Euler(0, 0, 0);
                 if (Left != null) return Quaternion.Euler(0, 90, 0);
             }
-            if (GameObject() == Corner)
+            if (GameObjectSet() == Corner)
             {
                 if (Down != null && Right != null) return Quaternion.Euler(0, 0, 0);
                 if (Down != null && Left != null) return Quaternion.Euler(0, 90, 0);
                 if (Up != null && Left != null) return Quaternion.Euler(0, 180, 0);
                 if (Up != null && Right != null) return Quaternion.Euler(0, 270, 0);
             }
-            if (GameObject() == TJunction)
+            if (GameObjectSet() == TJunction)
             {
                 if (Down != null && Right != null && Left != null) return Quaternion.Euler(0, 0, 0);
                 if (Down != null && Left != null && Up != null) return Quaternion.Euler(0, 90, 0);

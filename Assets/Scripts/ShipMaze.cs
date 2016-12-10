@@ -7,7 +7,8 @@ namespace Assets.Scripts
 {
     public class ShipMaze : MonoBehaviour
     {
-        public GameObject Straight, Corner, TJunction, Cross, DeadEnd, Door;
+        public GameObject[] Straight, Corner, TJunction, Cross, DeadEnd;
+        public GameObject Door;
         public Vector2 MazeSize = new Vector2(10, 10);
 
         private void Start()
