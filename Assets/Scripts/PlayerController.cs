@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEditor;
 using UnityEngine;
 
@@ -29,14 +30,24 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
     private void Update ()
     {
-        Inputs();
 		Aim();
         Punt();
+        Inputs();
         UI();
     }
 
     private void Inputs()
     {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Pressed E");
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out hit, 3, 1 << 9))
+            {
+                var doorOpener = hit.transform.gameObject.GetComponentInParent<DoorOpener>();
+                doorOpener.Open = !doorOpener.Open;
+            }
+        }
     }
 
     private void UI()

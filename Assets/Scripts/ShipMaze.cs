@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public class ShipMaze : MonoBehaviour
     {
-        public GameObject Straight, Corner, TJunction, Cross, DeadEnd;
+        public GameObject Straight, Corner, TJunction, Cross, DeadEnd, Door;
         public Vector2 MazeSize = new Vector2(10, 10);
 
         private void Start()
@@ -19,6 +19,7 @@ namespace Assets.Scripts
         {
             var maze = new MazeCell[(int)MazeSize.x, (int)MazeSize.y];
             var unvisited = new HashSet<MazeCell>();
+            var doors = new HashSet<Vector3>();
             for (var x = 0; x < MazeSize.x; x++)
             {
                 for (var y = 0; y < MazeSize.y; y++)
@@ -59,8 +60,24 @@ namespace Assets.Scripts
                     var mazeCell = maze[x, y];
                     Debug.Log(mazeCell);
                     Instantiate(mazeCell.GameObject(), mazeCell.Position(), mazeCell.Rotation(), transform);
+                    PlaceDoors(mazeCell, doors);
                 }
             }
+        }
+
+        private void PlaceDoors(MazeCell cell, HashSet<Vector3> doors)
+        {
+            Vector3 upDoor = cell.Position() + new Vector3(0, 0 , 5), downDoor = cell.Position() + new Vector3(0, 0, -5),
+                rightDoor = cell.Position() + new Vector3(5, 0, 0), leftDoor = cell.Position() + new Vector3(-5, 0, 0);
+            Quaternion leftRight = Quaternion.Euler(0, 90, 0);
+            if (cell.Up != null && Random.value > 0.75 && !doors.Contains(upDoor))
+                Instantiate(Door, upDoor, Quaternion.identity, transform);
+            if (cell.Down != null && Random.value > 0.75 && !doors.Contains(downDoor))
+                Instantiate(Door, downDoor, Quaternion.identity, transform);
+            if (cell.Left != null && Random.value > 0.75 && !doors.Contains(leftDoor))
+                Instantiate(Door, leftDoor, leftRight, transform);
+            if (cell.Right != null && Random.value > 0.75 && !doors.Contains(rightDoor))
+                Instantiate(Door, rightDoor, leftRight, transform);
         }
 
         private static void DebugLines(MazeCell cell)

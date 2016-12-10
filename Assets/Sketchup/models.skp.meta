@@ -5,19 +5,19 @@ licenseType: Free
 SketchUpImporter:
   generateBackFace: 0
   mergeCoplanarFaces: 0
-  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f0000002000000021000000220000002300000024000000250000002600000027000000
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f0000003000000031000000320000003300000034000000
   assetHash:
     serializedVersion: 2
-    Hash: cd10dcda0a94a2673e70920d6d3d59fe
+    Hash: 69b6eec024253c17d994893307706f6b
   longitude: -105.242139
   latitude: 40.018309
   northCorrection: -0
   fileUnit: 0
   sketchUpImportData:
     defaultCamera:
-      position: {x: -48.928402, y: 5.5133505, z: 3.4915164}
-      lookAt: {x: -49.219852, y: 4.565131, z: 28.01083}
-      up: {x: -0.00045927233, y: 0.99925315, z: 0.03863801}
+      position: {x: -71.37716, y: 23.222683, z: -11.823653}
+      lookAt: {x: -64.24641, y: 9.753861, z: 7.409754}
+      up: {x: 0.1908001, y: 0.8359105, z: 0.5146348}
       fov: 35
       aspectRatio: 0
       orthoSize: 1
@@ -48,6 +48,13 @@ SketchUpImporter:
     100040: corridor de
     100042: corridor deadend
     100044: corridor section short 9
+    100046: door frame
+    100048: doorplane
+    100050: doorplane 1
+    100052: doorplane 2
+    100054: corridor empty room
+    100056: corridor section tiny
+    100058: Group 49
     400000: corridor corner junction
     400002: corridor cross
     400004: corridor l
@@ -71,6 +78,13 @@ SketchUpImporter:
     400040: corridor de
     400042: corridor deadend
     400044: corridor section short 9
+    400046: door frame
+    400048: doorplane
+    400050: doorplane 1
+    400052: doorplane 2
+    400054: corridor empty room
+    400056: corridor section tiny
+    400058: Group 49
     2300000: corridor l
     2300002: corridor section
     2300004: corridor section 1
@@ -88,6 +102,12 @@ SketchUpImporter:
     2300028: Group 1
     2300030: corridor de
     2300032: corridor section short 9
+    2300034: door frame
+    2300036: doorplane
+    2300038: doorplane 1
+    2300040: doorplane 2
+    2300042: corridor section tiny
+    2300044: Group 49
     3300000: corridor l
     3300002: corridor section
     3300004: corridor section 1
@@ -105,6 +125,12 @@ SketchUpImporter:
     3300028: Group 1
     3300030: corridor de
     3300032: corridor section short 9
+    3300034: door frame
+    3300036: doorplane
+    3300038: doorplane 1
+    3300040: doorplane 2
+    3300042: corridor section tiny
+    3300044: Group 49
     4300000: Mesh Group 1
     4300002: Mesh corridor section
     4300004: Mesh corridor section short
@@ -112,6 +138,10 @@ SketchUpImporter:
     4300008: Mesh corridor t
     4300010: Mesh corridor l
     4300012: Mesh corridor de
+    4300014: Mesh door frame
+    4300016: Mesh doorplane
+    4300018: Mesh Group 49
+    4300020: Mesh corridor section tiny
   materials:
     importMaterials: 1
     materialName: 2
