@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public class DoorOpener : MonoBehaviour
+    public class DoorOpener : MonoBehaviour, IActionable
     {
         private Transform _leftDoor, _rightDoor;
         private Vector3 _leftClosed, _rightClosed;
@@ -46,7 +46,7 @@ namespace Assets.Scripts
             _rightDoor.position += Vector3.ClampMagnitude(rightDiff * Time.deltaTime * 2, rightDiff.magnitude);
         }
 
-        public void OpenDoor()
+        public void Action()
         {
             Open = true;
             _doorOpened = Time.time;

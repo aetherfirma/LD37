@@ -15,6 +15,7 @@ namespace Assets.Scripts
         private void Start()
         {
             GenerateMaze();
+            GetComponent<TheGame>().GameStart();
         }
 
         private bool InBounds(int x, int y)

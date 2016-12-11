@@ -45,8 +45,10 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out hit, 3, 1 << 9))
             {
-                var doorOpener = hit.transform.gameObject.GetComponentInParent<DoorOpener>();
-                doorOpener.OpenDoor();
+                Debug.Log("Hit something");
+                var actionable = hit.transform.gameObject.GetComponentInParent<IActionable>();
+                Debug.Log(actionable);
+                actionable.Action();
             }
         }
     }

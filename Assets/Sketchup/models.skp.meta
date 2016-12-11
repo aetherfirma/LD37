@@ -5,19 +5,19 @@ licenseType: Free
 SketchUpImporter:
   generateBackFace: 0
   mergeCoplanarFaces: 0
-  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f0000003000000031000000320000003300000034000000350000003600000037000000
+  selectedNodes: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d000000
   assetHash:
     serializedVersion: 2
-    Hash: c09f361b8eb2b940fa51993d0667ad4c
+    Hash: 9bdec127435b634e4b1bdfd29d62c4c2
   longitude: -105.242139
   latitude: 40.018309
   northCorrection: -0
   fileUnit: 0
   sketchUpImportData:
     defaultCamera:
-      position: {x: -7.636664, y: 6.595385, z: 3.8077002}
-      lookAt: {x: 2.6433, y: 1.729282, z: 25.552221}
-      up: {x: 0.08475338, y: 0.9801418, z: 0.17927316}
+      position: {x: -91.51143, y: 5.3528, z: 8.733776}
+      lookAt: {x: -85.89588, y: -3.5282335, z: 30.909746}
+      up: {x: 0.088841096, y: 0.93221325, z: 0.35083583}
       fov: 35
       aspectRatio: 0
       orthoSize: 1
@@ -58,6 +58,10 @@ SketchUpImporter:
     100060: corridor section short 10
     100062: Group 2
     100064: Group 50
+    100066: cryopod bay
+    100068: cryopod door
+    100070: Group 4
+    100072: Group 52
     400000: corridor corner junction
     400002: corridor cross
     400004: corridor l
@@ -91,6 +95,10 @@ SketchUpImporter:
     400060: corridor section short 10
     400062: Group 2
     400064: Group 50
+    400066: cryopod bay
+    400068: cryopod door
+    400070: Group 4
+    400072: Group 52
     2300000: corridor l
     2300002: corridor section
     2300004: corridor section 1
@@ -118,6 +126,10 @@ SketchUpImporter:
     2300048: Group 2
     2300050: Group 50
     2300052: //RootNode
+    2300054: cryopod bay
+    2300056: cryopod door
+    2300058: Group 4
+    2300060: Group 52
     3300000: corridor l
     3300002: corridor section
     3300004: corridor section 1
@@ -145,6 +157,10 @@ SketchUpImporter:
     3300048: Group 2
     3300050: Group 50
     3300052: //RootNode
+    3300054: cryopod bay
+    3300056: cryopod door
+    3300058: Group 4
+    3300060: Group 52
     4300000: Mesh Group 1
     4300002: Mesh corridor section
     4300004: Mesh corridor section short
@@ -159,6 +175,10 @@ SketchUpImporter:
     4300022: Mesh models
     4300024: Mesh Group 2
     4300026: Mesh Group 50
+    4300028: Mesh Group 4
+    4300030: Mesh Group 52
+    4300032: Mesh cryopod door
+    4300034: Mesh cryopod bay
     6400000: corridor de
     6400002: corridor l
     6400004: corridor section
@@ -184,6 +204,10 @@ SketchUpImporter:
     6400044: Group 2
     6400046: Group 50
     6400048: //RootNode
+    6400050: cryopod bay
+    6400052: cryopod door
+    6400054: Group 4
+    6400056: Group 52
   materials:
     importMaterials: 1
     materialName: 2
