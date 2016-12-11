@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -6,6 +7,7 @@ namespace Assets.Scripts
     {
         private Transform _leftDoor, _rightDoor;
         private Vector3 _leftClosed, _rightClosed;
+        private float _doorOpened, _doorOpenTime;
 
         public bool Open;
 
@@ -16,10 +18,14 @@ namespace Assets.Scripts
 
             _leftClosed = _leftDoor.position;
             _rightClosed = _rightDoor.position;
+
+            _doorOpenTime = 10 + Random.value * 20;
         }
 
         private void Update()
         {
+            if (Open && Time.time > _doorOpened + _doorOpenTime) Open = false;
+
             Vector3 leftOpen = _leftDoor.parent.rotation * new Vector3(1, 0, 0),
                 rightOpen = _leftDoor.parent.rotation * new Vector3(-1, 0, 0),
                 leftDesired, rightDesired;
@@ -38,6 +44,12 @@ namespace Assets.Scripts
             var rightDiff = rightDesired - _rightDoor.position;
             _leftDoor.position += Vector3.ClampMagnitude(leftDiff * Time.deltaTime * 2, leftDiff.magnitude);
             _rightDoor.position += Vector3.ClampMagnitude(rightDiff * Time.deltaTime * 2, rightDiff.magnitude);
+        }
+
+        public void OpenDoor()
+        {
+            Open = true;
+            _doorOpened = Time.time;
         }
     }
 }

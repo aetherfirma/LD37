@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private Collider _collider;
     private float _puntForce = 0;
     public float GrabRadius = 1;
+
     private bool _grabbing;
 
     private UnityEngine.UI.Slider _pushSlider;
@@ -45,7 +46,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out hit, 3, 1 << 9))
             {
                 var doorOpener = hit.transform.gameObject.GetComponentInParent<DoorOpener>();
-                doorOpener.Open = !doorOpener.Open;
+                doorOpener.OpenDoor();
             }
         }
     }
@@ -70,7 +71,8 @@ public class PlayerController : MonoBehaviour
     private void Aim()
     {
         float mouseX = Input.GetAxis("Mouse X"), mouseY = Input.GetAxis("Mouse Y");
-        _rigidbody.AddRelativeTorque(-mouseY * 40, mouseX * 40, 0);
+        bool a = Input.GetKey(KeyCode.A), d = Input.GetKey(KeyCode.D);
+        _rigidbody.AddRelativeTorque(-mouseY * 40, mouseX * 40, (a ? -20 : (d ? 20 : 0)));
     }
 
     private bool CanGrab()

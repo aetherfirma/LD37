@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -9,21 +10,31 @@ namespace Assets.Scripts
     {
         public GameObject[] Straight, Corner, TJunction, Cross, DeadEnd;
         public GameObject Door;
-        public Vector2 MazeSize = new Vector2(10, 10);
+        public int InnerRadius, OuterRadius;
 
         private void Start()
         {
             GenerateMaze();
         }
 
+        private bool InBounds(int x, int y)
+        {
+            x -= OuterRadius;
+            y -= OuterRadius;
+            var d = Mathf.Sqrt(x * x + y * y);
+            return d >= InnerRadius && d < OuterRadius;
+        }
+
         private void GenerateMaze()
         {
-            var maze = new MazeCell[(int)MazeSize.x, (int)MazeSize.y];
+            var width = OuterRadius * 2;
+            var maze = new MazeCell[width, width];
             var unvisited = new HashSet<MazeCell>();
-            for (var x = 0; x < MazeSize.x; x++)
+            for (var x = 0; x < width; x++)
             {
-                for (var y = 0; y < MazeSize.y; y++)
+                for (var y = 0; y < width; y++)
                 {
+                    if (!InBounds(x, y)) continue;
                     var mazeCell = new MazeCell(x, y, Straight, Corner, TJunction, Cross, DeadEnd);
                     unvisited.Add(mazeCell);
                     maze[x, y] = mazeCell;
@@ -53,12 +64,12 @@ namespace Assets.Scripts
                 cell = stack.Pop();
             }
 
-            for (var y = 0; y < MazeSize.y; y++)
+            for (var y = 0; y < width; y++)
             {
-                for (var x = 0; x < MazeSize.x; x++)
+                for (var x = 0; x < width; x++)
                 {
                     var mazeCell = maze[x, y];
-                    Debug.Log(mazeCell);
+                    if (mazeCell == null) continue;
                     Instantiate(mazeCell.GameObject(), mazeCell.Position(), mazeCell.Rotation(), transform);
                     PlaceDoors(mazeCell);
                 }
@@ -115,16 +126,16 @@ namespace Assets.Scripts
 
             nx = location.X + 1;
             ny = location.Y + 0;
-            if (nx >= 0  && nx < MazeSize.x && ny >= 0 && ny < MazeSize.y) neighbours.Add(maze[nx, ny]);
+            if (nx >= 0  && InBounds(nx, ny)) neighbours.Add(maze[nx, ny]);
             nx = location.X + 0;
             ny = location.Y + 1;
-            if (nx >= 0  && nx < MazeSize.x && ny >= 0 && ny < MazeSize.y) neighbours.Add(maze[nx, ny]);
+            if (nx >= 0  && InBounds(nx, ny)) neighbours.Add(maze[nx, ny]);
             nx = location.X - 1;
             ny = location.Y + 0;
-            if (nx >= 0  && nx < MazeSize.x && ny >= 0 && ny < MazeSize.y) neighbours.Add(maze[nx, ny]);
+            if (nx >= 0  && InBounds(nx, ny)) neighbours.Add(maze[nx, ny]);
             nx = location.X + 0;
             ny = location.Y - 1;
-            if (nx >= 0  && nx < MazeSize.x && ny >= 0 && ny < MazeSize.y) neighbours.Add(maze[nx, ny]);
+            if (nx >= 0  && InBounds(nx, ny)) neighbours.Add(maze[nx, ny]);
 
             return neighbours;
         }
