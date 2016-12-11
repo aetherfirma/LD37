@@ -19,10 +19,15 @@ namespace Assets.Scripts
             _door.rotation = Quaternion.Lerp(_door.rotation, transform.rotation * target, (Time.time - _actioned) * 0.01f);
         }
 
-        public void Action()
+        public void Execute()
         {
             Open = !Open;
             _actioned = Time.time;
+        }
+
+        public string Action()
+        {
+            return !Open ? "open the cryopod" : "close the cryopod";
         }
     }
 }

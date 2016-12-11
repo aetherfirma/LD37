@@ -46,10 +46,15 @@ namespace Assets.Scripts
             _rightDoor.position += Vector3.ClampMagnitude(rightDiff * Time.deltaTime * 2, rightDiff.magnitude);
         }
 
-        public void Action()
+        public void Execute()
         {
             Open = true;
             _doorOpened = Time.time;
+        }
+
+        public string Action()
+        {
+            return !Open ? "open the door" : null;
         }
     }
 }

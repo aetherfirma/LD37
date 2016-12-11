@@ -2,6 +2,7 @@
 {
     public interface IActionable
     {
-        void Action();
+        void Execute();
+        string Action();
     }
 }

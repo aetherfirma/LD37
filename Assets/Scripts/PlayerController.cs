@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts;
-using UnityEditor;
+﻿using Assets.Scripts;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -11,7 +8,9 @@ public class PlayerController : MonoBehaviour
     private float _puntForce = 0;
     public float GrabRadius = 1;
 
+    private GameObject[] _escapePods;
     private bool _grabbing;
+    private IActionable _action;
 
     private UnityEngine.UI.Slider _pushSlider;
     private UnityEngine.UI.Text _freefallStatus;
@@ -32,40 +31,48 @@ public class PlayerController : MonoBehaviour
     private void Update ()
     {
 		Aim();
+        LookAhead();
         Punt();
         Inputs();
         UI();
     }
 
+    private void LookAhead()
+    {
+        _action = null;
+        RaycastHit hit;
+        if (!Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out hit, 3, 1 << 9)) return;
+        _action = hit.transform.gameObject.GetComponentInParent<IActionable>();
+    }
+
     private void Inputs()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && _action != null)
         {
-            Debug.Log("Pressed E");
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.rotation * Vector3.forward, out hit, 3, 1 << 9))
-            {
-                Debug.Log("Hit something");
-                var actionable = hit.transform.gameObject.GetComponentInParent<IActionable>();
-                Debug.Log(actionable);
-                actionable.Action();
-            }
+            _action.Execute();
         }
     }
 
     private void UI()
     {
-        if (_grabbing)
+        if (_escapePods == null) _escapePods = GameObject.FindGameObjectsWithTag("Escape Pod");
+
+        if (_action != null && _action.Action() != null)
         {
-            _freefallStatus.text = "GRABBING";
+            _freefallStatus.text = ("press e to " + _action.Action()).ToUpper();
         }
-        else if (CanGrab())
+        else if (_grabbing)
         {
-            _freefallStatus.text = "";
+            _freefallStatus.text = "DECELERATING";
         }
         else
         {
-            _freefallStatus.text = "FLOATING";
+            var minDistance = 1e6f;
+            foreach (var escapePod in _escapePods)
+            {
+                minDistance = Mathf.Min(minDistance, (transform.position - escapePod.transform.position).magnitude);
+            }
+            _freefallStatus.text = Mathf.Round(minDistance) + "M TO ESCAPE POD";
         }
         _pushSlider.value = _puntForce;
     }
@@ -77,24 +84,18 @@ public class PlayerController : MonoBehaviour
         _rigidbody.AddRelativeTorque(-mouseY * 40, mouseX * 40, (a ? -20 : (d ? 20 : 0)));
     }
 
-    private bool CanGrab()
-    {
-        return Physics.CheckSphere(_rigidbody.position, GrabRadius, ~(1 << 8));
-    }
-
     private void Punt()
     {
-        var grab = CanGrab();
         if (Input.GetKey(KeyCode.Mouse0))
         {
             _puntForce = Mathf.Min(_puntForce + Time.deltaTime * 30000, 15000);
         }
         else
         {
-            if (grab) _rigidbody.AddRelativeForce(0, 0, _puntForce);
+            _rigidbody.AddRelativeForce(0, 0, _puntForce);
             _puntForce = 0;
         }
-        if (grab && Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
             _rigidbody.drag = 2;
             _grabbing = true;
