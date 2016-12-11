@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private Collider _collider;
     private float _puntForce = 0;
     public float GrabRadius = 1;
 
@@ -15,11 +14,12 @@ public class PlayerController : MonoBehaviour
     private UnityEngine.UI.Slider _pushSlider;
     private UnityEngine.UI.Text _freefallStatus;
 
+    public bool Won;
+
     // Use this for initialization
     private void Start ()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        _collider = GetComponent<SphereCollider>();
 
         _pushSlider = GameObject.Find("Push Slider").GetComponent<UnityEngine.UI.Slider>();
         _freefallStatus = GameObject.Find("Freefall Status").GetComponent<UnityEngine.UI.Text>();
