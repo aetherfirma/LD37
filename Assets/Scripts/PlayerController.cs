@@ -58,7 +58,12 @@ public class PlayerController : MonoBehaviour
         GUI.color = color;
         GUI.depth = -1000;
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), FadeOutTexture);
-        if (_alpha > 0.99f) SceneManager.LoadScene(0);
+        if (_alpha > 0.99f)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void LookAhead()
