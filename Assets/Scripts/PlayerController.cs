@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class PlayerController : MonoBehaviour
     private Message _currentMessage;
 
     private UnityEngine.UI.Text _freefallStatus;
+
+    public Texture2D FadeOutTexture;
+    private float _alpha;
+    public float FadeSpeed = 0.2f;
 
     public bool Won;
 
@@ -42,6 +47,18 @@ public class PlayerController : MonoBehaviour
         Punt();
         Inputs();
         UI();
+    }
+
+    private void OnGUI()
+    {
+        if (!Won) return;
+        _alpha += Mathf.Clamp01(FadeSpeed * Time.deltaTime);
+        var color = GUI.color;
+        color.a = _alpha;
+        GUI.color = color;
+        GUI.depth = -1000;
+        GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), FadeOutTexture);
+        if (_alpha > 0.99f) SceneManager.LoadScene(0);
     }
 
     private void LookAhead()
