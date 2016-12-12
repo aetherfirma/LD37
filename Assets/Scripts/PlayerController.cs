@@ -1,4 +1,5 @@
-﻿using Assets.Scripts;
+﻿using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,8 +11,13 @@ public class PlayerController : MonoBehaviour
     private GameObject[] _escapePods;
     private bool _grabbing;
     private IActionable _action;
+    private Light _light;
+    private AudioSource _mixer;
 
-    private UnityEngine.UI.Slider _pushSlider;
+    public List<Message> MessageQueue;
+    private float _messageDisplayedUntil;
+    private Message _currentMessage;
+
     private UnityEngine.UI.Text _freefallStatus;
 
     public bool Won;
@@ -20,8 +26,9 @@ public class PlayerController : MonoBehaviour
     private void Start ()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _light = GetComponentInChildren<Light>();
+        _mixer = GetComponentInChildren<AudioSource>();
 
-        _pushSlider = GameObject.Find("Push Slider").GetComponent<UnityEngine.UI.Slider>();
         _freefallStatus = GameObject.Find("Freefall Status").GetComponent<UnityEngine.UI.Text>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -51,13 +58,27 @@ public class PlayerController : MonoBehaviour
         {
             _action.Execute();
         }
+
+        if (Input.GetKeyDown(KeyCode.F)) _light.enabled = !_light.enabled;
     }
 
     private void UI()
     {
         if (_escapePods == null) _escapePods = GameObject.FindGameObjectsWithTag("Escape Pod");
 
-        if (_action != null && _action.Action() != null)
+        if (Time.time < _messageDisplayedUntil)
+        {
+            _freefallStatus.text = _currentMessage.Text.ToUpper();
+        }
+        else if (MessageQueue.Count > 0)
+        {
+            _currentMessage = MessageQueue[0];
+            MessageQueue.RemoveAt(0);
+            _messageDisplayedUntil = Time.time + _currentMessage.Audio.length + 2;
+            _freefallStatus.text = _currentMessage.Text.ToUpper();
+            _mixer.PlayOneShot(_currentMessage.Audio);
+        }
+        else if (_action != null && _action.Action() != null)
         {
             _freefallStatus.text = ("press e to " + _action.Action()).ToUpper();
         }
@@ -74,14 +95,13 @@ public class PlayerController : MonoBehaviour
             }
             _freefallStatus.text = Mathf.Round(minDistance) + "M TO ESCAPE POD";
         }
-        _pushSlider.value = _puntForce;
     }
 
     private void Aim()
     {
         float mouseX = Input.GetAxis("Mouse X"), mouseY = Input.GetAxis("Mouse Y");
-        bool a = Input.GetKey(KeyCode.A), d = Input.GetKey(KeyCode.D);
-        _rigidbody.AddRelativeTorque(-mouseY * 40, mouseX * 40, (a ? -20 : (d ? 20 : 0)));
+        bool a = Input.GetKey(KeyCode.D), d = Input.GetKey(KeyCode.A);
+        _rigidbody.AddRelativeTorque(-mouseY * 40, mouseX * 40, a ? -40 : (d ? 40 : 0));
     }
 
     private void Punt()
@@ -92,7 +112,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _rigidbody.AddRelativeForce(0, 0, _puntForce);
+            var backwards = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+            _rigidbody.AddRelativeForce(0, 0, backwards ? -_puntForce / 2 : _puntForce);
             _puntForce = 0;
         }
         if (Input.GetKey(KeyCode.Mouse1))

@@ -2,7 +2,17 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    internal class MazeCell
+    public enum CellType
+    {
+        NoCell,
+        DeadEnd,
+        Room,
+        Straight,
+        Corner,
+        TJunction,
+        Cross
+    }
+    public class MazeCell
     {
         public GameObject[] Straight, Corner, TJunction, Cross, DeadEnd;
 
@@ -12,6 +22,8 @@ namespace Assets.Scripts
 
         public int X, Y;
         private readonly GameObject[][] _gameObjectLookup;
+        private readonly CellType[] _cellTypeLookup;
+        private GameObject _gameObject;
 
         public MazeCell(int x, int y, GameObject[] straight, GameObject[] corner, GameObject[] tJunction, GameObject[] cross, GameObject[] deadEnd)
         {
@@ -31,6 +43,14 @@ namespace Assets.Scripts
                 null,
                 TJunction,
                 Cross
+            };
+            _cellTypeLookup = new[]
+            {
+                CellType.NoCell,
+                CellType.Room,
+                CellType.NoCell,
+                CellType.TJunction,
+                CellType.Cross
             };
         }
 
@@ -77,8 +97,21 @@ namespace Assets.Scripts
 
         public GameObject GameObject()
         {
-            var gameObjectSet = GameObjectSet();
-            return gameObjectSet[Mathf.RoundToInt(Random.value * (gameObjectSet.Length - 1))];
+            if (_gameObject == null)
+            {
+                var gameObjectSet = GameObjectSet();
+                _gameObject = gameObjectSet[Mathf.RoundToInt(Random.value * (gameObjectSet.Length - 1))];
+            }
+            return _gameObject;
+        }
+
+        public CellType Type()
+        {
+            if (Connections() == 2)
+            {
+                return (Up != null || Down != null) && (Left != null || Right != null) ? CellType.Corner : CellType.Straight;
+            }
+            return _cellTypeLookup[Connections()];
         }
 
         public Quaternion Rotation()

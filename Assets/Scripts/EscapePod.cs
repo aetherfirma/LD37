@@ -9,6 +9,8 @@ namespace Assets.Scripts
         private PlayerController _player;
         private float _activated;
 
+        public Message ActiaveMessage;
+
         private void Start()
         {
             _door = transform.Find("escape pod door").transform;
@@ -25,6 +27,7 @@ namespace Assets.Scripts
             if (Activated) return;
             Activated = true;
             _activated = Time.time;
+            _player.MessageQueue.Add(ActiaveMessage);
         }
 
         private void Update()

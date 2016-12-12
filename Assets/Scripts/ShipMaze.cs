@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -11,6 +10,7 @@ namespace Assets.Scripts
         public GameObject[] Straight, Corner, TJunction, Cross, DeadEnd;
         public GameObject Door;
         public int InnerRadius, OuterRadius;
+        public MazeCell[,] Maze;
 
         private void Start()
         {
@@ -64,6 +64,9 @@ namespace Assets.Scripts
                 if (stack.Count == 0) break;
                 cell = stack.Pop();
             }
+
+            Maze = maze;
+            GameObject.Find("Minimap").GetComponent<Minimap>().GenerateMinimap();
 
             for (var y = 0; y < width; y++)
             {
